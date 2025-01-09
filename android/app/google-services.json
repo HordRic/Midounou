@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1030068367887",
+    "project_id": "midouno-c6251",
+    "storage_bucket": "midouno-c6251.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030068367887:android:660ef61c30ca5401a1a97a",
+        "android_client_info": {
+          "package_name": "com.midounou.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQeUraYOYc9kUP8N_ABwlsUaFNRa4Ia7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
