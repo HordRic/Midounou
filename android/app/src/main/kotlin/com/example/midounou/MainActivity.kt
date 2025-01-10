@@ -1,4 +1,4 @@
-package com.example.midounou
+package com.midounou.app
 
 import io.flutter.embedding.android.FlutterActivity
 

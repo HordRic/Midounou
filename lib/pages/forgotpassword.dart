@@ -10,7 +10,7 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  TextEditingController mailcontroller = new TextEditingController();
+  TextEditingController mailcontroller = TextEditingController();
 
   String email = "";
 
