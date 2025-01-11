@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:midounou/service/database.dart';
 import 'package:midounou/service/shared_pref.dart';
@@ -17,6 +18,7 @@ class _OrderState extends State<Order> {
   String? id, wallet;
   int total = 0, amount2 = 0;
   Stream<QuerySnapshot>? foodStream;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -25,23 +27,60 @@ class _OrderState extends State<Order> {
     startTimer();
   }
 
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   void startTimer() {
-    Timer(Duration(seconds: 3), () {
-      amount2 = total;
-      setState(() {});
+    _timer = Timer(Duration(seconds: 3), () {
+      if (mounted) {
+        setState(() {
+          amount2 = total;
+        });
+      }
     });
   }
 
   getthesharedpref() async {
-    id = await SharedPreferenceHelper().getUserId();
-    wallet = await SharedPreferenceHelper().getUserWallet();
-    setState(() {});
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      id = user.uid;
+      wallet = await SharedPreferenceHelper().getUserWallet();
+      if (id == null) {
+        print("User ID is null");
+      } else {
+        print("User ID: $id");
+      }
+      if (wallet == null) {
+        print("User wallet is null");
+      } else {
+        print("User wallet: $wallet");
+      }
+    } else {
+      print("No user is signed in");
+    }
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   ontheload() async {
     await getthesharedpref();
-    foodStream = await DatabaseMethods().getFoodCart(id!);
-    setState(() {});
+    if (id != null) {
+      foodStream = await DatabaseMethods().getFoodCart(id!);
+      if (mounted) {
+        setState(() {});
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text(
+            "Failed to load food cart. User ID is null.",
+            style: TextStyle(fontSize: 18.0),
+          )));
+    }
   }
 
   Widget foodCart() {
@@ -168,11 +207,27 @@ class _OrderState extends State<Order> {
             const SizedBox(height: 20.0),
             GestureDetector(
               onTap: () async {
-                int amount = int.parse(wallet!) - amount2;
-                await DatabaseMethods()
-                    .updateUserWallet(id!, amount.toString());
-                await SharedPreferenceHelper()
-                    .saveUserWallet(amount.toString());
+                if (id != null && wallet != null) {
+                  int amount = int.parse(wallet!) - amount2;
+                  await DatabaseMethods()
+                      .updateUserWallet(id!, amount.toString());
+                  await SharedPreferenceHelper()
+                      .saveUserWallet(amount.toString());
+                  await DatabaseMethods().clearUserCart(id!);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor: Colors.greenAccent,
+                      content: Text(
+                        "Checkout successful",
+                        style: TextStyle(fontSize: 18.0),
+                      )));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor: Colors.redAccent,
+                      content: Text(
+                        "Failed to checkout. User ID or wallet is null.",
+                        style: TextStyle(fontSize: 18.0),
+                      )));
+                }
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),

@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../service/database.dart';
-import '../service/shared_pref.dart';
 import '../widget/widget_support.dart';
 
 class Details extends StatefulWidget {
@@ -28,7 +28,17 @@ class _DetailsState extends State<Details> {
   }
 
   getthesharedpref() async {
-    id = await SharedPreferenceHelper().getUserId();
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      id = user.uid;
+      if (id == null) {
+        print("User ID is null");
+      } else {
+        print("User ID: $id");
+      }
+    } else {
+      print("No user is signed in");
+    }
     if (mounted) {
       setState(() {});
     }
@@ -158,7 +168,7 @@ class _DetailsState extends State<Details> {
                         style: AppWidget.semiBooldTextFeildStyle(),
                       ),
                       Text(
-                        "\$" + total.toString(),
+                        total.toString() + " FrCFA",
                         style: AppWidget.HeadLineTextFeildStyle(),
                       )
                     ],
