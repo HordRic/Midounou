@@ -31,17 +31,17 @@ class _LogInState extends State<LogIn> {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => BottomNav()));
+          context, MaterialPageRoute(builder: (context) => const BottomNav()));
     } on FirebaseAuthException catch (e) {
       setState(() {
         isLoading = false;
       });
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("No User Found for that Email")));
+            const SnackBar(content: Text("No User Found for that Email")));
       } else if (e.code == 'wrong-password') {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Wrong Password Provided by User")));
+            const SnackBar(content: Text("Wrong Password Provided by User")));
       }
     }
   }
@@ -79,7 +79,7 @@ class _LogInState extends State<LogIn> {
 
       if (userCredential.user != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => BottomNav()));
+            context, MaterialPageRoute(builder: (context) => const BottomNav()));
       }
 
       return userCredential;
@@ -97,16 +97,16 @@ class _LogInState extends State<LogIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
-              child: Container(
+              child: SizedBox(
                 height: MediaQuery.of(context).size.height,
                 child: Stack(
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height / 2.5,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -120,16 +120,16 @@ class _LogInState extends State<LogIn> {
                           top: MediaQuery.of(context).size.height / 3),
                       height: MediaQuery.of(context).size.height / 2,
                       width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(40),
                               topRight: Radius.circular(40))),
-                      child: Text(""),
+                      child: const Text(""),
                     ),
                     Container(
                       margin:
-                          EdgeInsets.only(top: 60.0, left: 20.0, right: 20.0),
+                          const EdgeInsets.only(top: 60.0, left: 20.0, right: 20.0),
                       child: Column(
                         children: [
                           Center(
@@ -138,14 +138,14 @@ class _LogInState extends State<LogIn> {
                             width: MediaQuery.of(context).size.width / 1.5,
                             fit: BoxFit.cover,
                           )),
-                          SizedBox(
+                          const SizedBox(
                             height: 50.0,
                           ),
                           Material(
                             elevation: 5.0,
                             borderRadius: BorderRadius.circular(20),
                             child: Container(
-                              padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                               width: MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -154,14 +154,14 @@ class _LogInState extends State<LogIn> {
                                 key: _formkey,
                                 child: Column(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30.0,
                                     ),
                                     Text(
                                       "Login",
                                       style: AppWidget.HeadLineTextFeildStyle(),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30.0,
                                     ),
                                     TextFormField(
@@ -177,9 +177,9 @@ class _LogInState extends State<LogIn> {
                                           hintStyle: AppWidget
                                               .semiBooldTextFeildStyle(),
                                           prefixIcon:
-                                              Icon(Icons.email_outlined)),
+                                              const Icon(Icons.email_outlined)),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 30.0,
                                     ),
                                     TextFormField(
@@ -196,9 +196,9 @@ class _LogInState extends State<LogIn> {
                                           hintStyle: AppWidget
                                               .semiBooldTextFeildStyle(),
                                           prefixIcon:
-                                              Icon(Icons.password_outlined)),
+                                              const Icon(Icons.password_outlined)),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20.0,
                                     ),
                                     GestureDetector(
@@ -207,7 +207,7 @@ class _LogInState extends State<LogIn> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ForgotPassword()));
+                                                    const ForgotPassword()));
                                       },
                                       child: Container(
                                           alignment: Alignment.topRight,
@@ -217,7 +217,7 @@ class _LogInState extends State<LogIn> {
                                                 .semiBooldTextFeildStyle(),
                                           )),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20.0,
                                     ),
                                     GestureDetector(
@@ -235,14 +235,14 @@ class _LogInState extends State<LogIn> {
                                         elevation: 5.0,
                                         borderRadius: BorderRadius.circular(20),
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               vertical: 10.0, horizontal: 15),
                                           width: 200,
                                           decoration: BoxDecoration(
-                                              color: Color(0Xffff5722),
+                                              color: const Color(0Xffff5722),
                                               borderRadius:
                                                   BorderRadius.circular(20)),
-                                          child: Center(
+                                          child: const Center(
                                               child: Text(
                                             "LOGIN",
                                             style: TextStyle(
@@ -254,7 +254,7 @@ class _LogInState extends State<LogIn> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 10.0,
                                     ),
                                     ElevatedButton.icon(
@@ -264,7 +264,7 @@ class _LogInState extends State<LogIn> {
                                         height: 24.0,
                                         width: 24.0,
                                       ),
-                                      label: Text("Log In with Google"),
+                                      label: const Text("Log In with Google"),
                                       style: ElevatedButton.styleFrom(
                                         foregroundColor: Colors.black,
                                         backgroundColor: Colors.white,
@@ -273,7 +273,7 @@ class _LogInState extends State<LogIn> {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             vertical: 15.0, horizontal: 20),
                                       ),
                                     ),
@@ -282,7 +282,7 @@ class _LogInState extends State<LogIn> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 50.0,
                           ),
                           GestureDetector(
@@ -290,7 +290,7 @@ class _LogInState extends State<LogIn> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => SignUp()));
+                                        builder: (context) => const SignUp()));
                               },
                               child: Text(
                                 "Don't have an account? Sign up",

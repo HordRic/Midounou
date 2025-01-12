@@ -1,34 +1,30 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:midounou/pages/profile.dart';
-import 'package:midounou/pages/wallet.dart';
+import 'package:midounou/admin/add_food.dart';
+import 'package:midounou/admin/admin_orders.dart';
+import 'package:midounou/admin/home_admin.dart';
 
-import 'home.dart';
-import 'order.dart';
-
-class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+class AdminBottomNav extends StatefulWidget {
+  const AdminBottomNav({super.key});
 
   @override
-  State<BottomNav> createState() => _BottomNavState();
+  State<AdminBottomNav> createState() => _AdminBottomNavState();
 }
 
-class _BottomNavState extends State<BottomNav> {
+class _AdminBottomNavState extends State<AdminBottomNav> {
   int currentTabIndex = 0;
 
   late List<Widget> pages;
-  late Home homepage;
-  late Profile profile;
-  late Order order;
-  late Wallet wallet;
+  late HomeAdmin homeAdmin;
+  late AddFood addFood;
+  late AdminOrders adminOrders;
 
   @override
   void initState() {
-    homepage = const Home();
-    order = const Order();
-    profile = const Profile();
-    wallet = const Wallet();
-    pages = [homepage, order, wallet, profile];
+    homeAdmin = const HomeAdmin();
+    addFood = const AddFood();
+    adminOrders = const AdminOrders();
+    pages = [homeAdmin, addFood, adminOrders];
     super.initState();
   }
 
@@ -51,17 +47,13 @@ class _BottomNavState extends State<BottomNav> {
             color: Colors.white,
           ),
           Icon(
-            Icons.shopping_bag_outlined,
+            Icons.add,
             color: Colors.white,
           ),
           Icon(
-            Icons.wallet_outlined,
+            Icons.list,
             color: Colors.white,
           ),
-          Icon(
-            Icons.person_outline,
-            color: Colors.white,
-          )
         ],
       ),
       body: pages[currentTabIndex], // Affichage de la page actuelle

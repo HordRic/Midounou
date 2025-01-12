@@ -6,8 +6,8 @@ import '../widget/widget_support.dart';
 
 class Details extends StatefulWidget {
   final String image, name, detail, price;
-  Details(
-      {required this.detail,
+  const Details(
+      {super.key, required this.detail,
       required this.image,
       required this.name,
       required this.price});
@@ -59,7 +59,7 @@ class _DetailsState extends State<Details> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.all(20.0),
+          margin: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -67,28 +67,28 @@ class _DetailsState extends State<Details> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios_new_outlined,
                     color: Colors.black,
                   )),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Image.network(
                 widget.image,
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 2.5,
                 fit: BoxFit.cover,
               ),
-              SizedBox(height: 15.0),
+              const SizedBox(height: 15.0),
               Text(
                 widget.name,
                 style: AppWidget.semiBooldTextFeildStyle(),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Text(
                 widget.detail,
                 style: AppWidget.LightTextFeildStyle(),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Row(
                 children: [
                   GestureDetector(
@@ -105,18 +105,18 @@ class _DetailsState extends State<Details> {
                       decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(8)),
-                      child: Icon(
+                      child: const Icon(
                         Icons.remove,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  SizedBox(width: 20.0),
+                  const SizedBox(width: 20.0),
                   Text(
                     a.toString(),
                     style: AppWidget.semiBooldTextFeildStyle(),
                   ),
-                  SizedBox(width: 20.0),
+                  const SizedBox(width: 20.0),
                   GestureDetector(
                     onTap: () {
                       ++a;
@@ -129,7 +129,7 @@ class _DetailsState extends State<Details> {
                       decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(8)),
-                      child: Icon(
+                      child: const Icon(
                         Icons.add,
                         color: Colors.white,
                       ),
@@ -137,26 +137,26 @@ class _DetailsState extends State<Details> {
                   )
                 ],
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Row(
                 children: [
                   Text(
                     "Delivery Time",
                     style: AppWidget.semiBooldTextFeildStyle(),
                   ),
-                  SizedBox(width: 25.0),
-                  Icon(
+                  const SizedBox(width: 25.0),
+                  const Icon(
                     Icons.alarm,
                     color: Colors.black54,
                   ),
-                  SizedBox(width: 5.0),
+                  const SizedBox(width: 5.0),
                   Text(
                     "30 min",
                     style: AppWidget.semiBooldTextFeildStyle(),
                   )
                 ],
               ),
-              SizedBox(height: 30.0),
+              const SizedBox(height: 30.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -168,7 +168,7 @@ class _DetailsState extends State<Details> {
                         style: AppWidget.semiBooldTextFeildStyle(),
                       ),
                       Text(
-                        total.toString() + " FrCFA",
+                        "$total FrCFA",
                         style: AppWidget.HeadLineTextFeildStyle(),
                       )
                     ],
@@ -184,14 +184,14 @@ class _DetailsState extends State<Details> {
                         };
                         await DatabaseMethods()
                             .addFoodToCart(addFoodtoCart, id!);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                             backgroundColor: Colors.orangeAccent,
                             content: Text(
                               "Food Added to Cart",
                               style: TextStyle(fontSize: 18.0),
                             )));
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                             backgroundColor: Colors.redAccent,
                             content: Text(
                               "Failed to add food to cart. User ID is null.",
@@ -201,32 +201,32 @@ class _DetailsState extends State<Details> {
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width / 2,
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(10)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
+                          const Text(
                             "Add to cart",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16.0,
                                 fontFamily: 'Poppins'),
                           ),
-                          SizedBox(width: 30.0),
+                          const SizedBox(width: 30.0),
                           Container(
-                            padding: EdgeInsets.all(3),
+                            padding: const EdgeInsets.all(3),
                             decoration: BoxDecoration(
                                 color: Colors.grey,
                                 borderRadius: BorderRadius.circular(8)),
-                            child: Icon(
+                            child: const Icon(
                               Icons.shopping_cart_outlined,
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(width: 10.0),
+                          const SizedBox(width: 10.0),
                         ],
                       ),
                     ),

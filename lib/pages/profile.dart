@@ -66,7 +66,7 @@ class _ProfileState extends State<Profile> {
         profile = downloadUrl;
         await SharedPreferenceHelper().saveUserProfile(profile!);
         setState(() {});
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Profile image uploaded successfully"),
           backgroundColor: Colors.green,
         ));
@@ -89,18 +89,24 @@ class _ProfileState extends State<Profile> {
       if (user != null) {
         DocumentSnapshot userDetails =
             await DatabaseMethods().getUserDetails(user.uid);
-        name = userDetails.get('name');
-        email = userDetails.get('email');
-        profile = userDetails.get('profile');
-        await SharedPreferenceHelper().saveUserName(name!);
-        await SharedPreferenceHelper().saveUserEmail(email!);
-        await SharedPreferenceHelper().saveUserProfile(profile!);
+        if (userDetails.exists) {
+          var data = userDetails.data() as Map<String, dynamic>;
+          name = data.containsKey('name') ? data['name'] : null;
+          email = data.containsKey('email') ? data['email'] : null;
+          profile = data.containsKey('profile') ? data['profile'] : null;
+
+          if (name != null) await SharedPreferenceHelper().saveUserName(name!);
+          if (email != null)
+            await SharedPreferenceHelper().saveUserEmail(email!);
+          if (profile != null)
+            await SharedPreferenceHelper().saveUserProfile(profile!);
+        }
       }
       setState(() {
         isLoading = false;
       });
       print("Profile loaded: name=$name, email=$email, profile=$profile");
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Profile loaded successfully"),
         backgroundColor: Colors.green,
       ));

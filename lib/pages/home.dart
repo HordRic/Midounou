@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
   String? userName;
 
   ontheload() async {
-    fooditemStream = await DatabaseMethods().getFoodItems();
+    fooditemStream = DatabaseMethods().getFoodItems();
     if (mounted) {
       setState(() {});
     }
@@ -49,11 +49,11 @@ class _HomeState extends State<Home> {
       stream: fooditemStream,
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Erreur: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data.docs.isEmpty) {
-          return Center(child: Text('Aucun article trouvé'));
+          return const Center(child: Text('Aucun article trouvé'));
         } else {
           return ListView.builder(
             padding: EdgeInsets.zero,
@@ -75,12 +75,12 @@ class _HomeState extends State<Home> {
                   );
                 },
                 child: Container(
-                  margin: EdgeInsets.all(4),
+                  margin: const EdgeInsets.all(4),
                   child: Material(
                     elevation: 5.0,
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
-                      padding: EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(14),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -97,14 +97,14 @@ class _HomeState extends State<Home> {
                             ds["Name"],
                             style: AppWidget.semiBooldTextFeildStyle(),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5.0,
                           ),
                           Text(
                             "Déliceux et energétique",
                             style: AppWidget.LightTextFeildStyle(),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5.0,
                           ),
                           Text(
@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 50.0,
           left: 20.0,
         ),
@@ -141,30 +141,30 @@ class _HomeState extends State<Home> {
                 Text("Hello, ${userName ?? 'User'}",
                     style: AppWidget.boldTextFeildStyle()),
                 Container(
-                  margin: EdgeInsets.only(right: 20.0),
-                  padding: EdgeInsets.all(3),
+                  margin: const EdgeInsets.only(right: 20.0),
+                  padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(8)),
-                  child: Icon(
+                  child: const Icon(
                     Icons.shopping_cart,
                     color: Colors.white,
                   ),
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             Text("Delicious Food", style: AppWidget.HeadLineTextFeildStyle()),
             Text("Discover and Get Great Food",
                 style: AppWidget.LightTextFeildStyle()),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(right: 20.0),
+                margin: const EdgeInsets.only(right: 20.0),
                 child: allItems(),
               ),
             ),

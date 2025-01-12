@@ -26,8 +26,8 @@ class _AddFoodState extends State<AddFood> {
   bool isLoading = false;
 
   Future<void> getImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       selectedImage = File(image.path);
       setState(() {});
@@ -69,14 +69,14 @@ class _AddFoodState extends State<AddFood> {
         setState(() {
           isLoading = false;
         });
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             backgroundColor: Colors.orangeAccent,
             content: Text(
               "Food Item has been added Successfully",
               style: TextStyle(fontSize: 18.0),
             )));
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Home()));
+            context, MaterialPageRoute(builder: (context) => const Home()));
       }).catchError((error) {
         setState(() {
           isLoading = false;
@@ -85,11 +85,11 @@ class _AddFoodState extends State<AddFood> {
             backgroundColor: Colors.redAccent,
             content: Text(
               "Failed to add Food Item: $error",
-              style: TextStyle(fontSize: 18.0),
+              style: const TextStyle(fontSize: 18.0),
             )));
       });
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.redAccent,
           content: Text(
             "Please fill all fields and select an image",
@@ -106,7 +106,7 @@ class _AddFoodState extends State<AddFood> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios_new_outlined,
               color: Color(0xFF373866),
             )),
@@ -117,10 +117,10 @@ class _AddFoodState extends State<AddFood> {
         ),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Container(
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                     left: 20.0, right: 20.0, top: 20.0, bottom: 50.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +129,7 @@ class _AddFoodState extends State<AddFood> {
                       "Upload the Item Picture",
                       style: AppWidget.semiBooldTextFeildStyle(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20.0,
                     ),
                     selectedImage == null
@@ -149,7 +149,7 @@ class _AddFoodState extends State<AddFood> {
                                         color: Colors.black, width: 1.5),
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.camera_alt_outlined,
                                     color: Colors.black,
                                   ),
@@ -179,21 +179,21 @@ class _AddFoodState extends State<AddFood> {
                               ),
                             ),
                           ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     Text(
                       "Item Name",
                       style: AppWidget.semiBooldTextFeildStyle(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                          color: Color(0xFFececf8),
+                          color: const Color(0xFFececf8),
                           borderRadius: BorderRadius.circular(10)),
                       child: TextField(
                         controller: namecontroller,
@@ -203,21 +203,21 @@ class _AddFoodState extends State<AddFood> {
                             hintStyle: AppWidget.LightTextFeildStyle()),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     Text(
                       "Item Price",
                       style: AppWidget.semiBooldTextFeildStyle(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                          color: Color(0xFFececf8),
+                          color: const Color(0xFFececf8),
                           borderRadius: BorderRadius.circular(10)),
                       child: TextField(
                         controller: pricecontroller,
@@ -227,21 +227,21 @@ class _AddFoodState extends State<AddFood> {
                             hintStyle: AppWidget.LightTextFeildStyle()),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     Text(
                       "Item Detail",
                       style: AppWidget.semiBooldTextFeildStyle(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                          color: Color(0xFFececf8),
+                          color: const Color(0xFFececf8),
                           borderRadius: BorderRadius.circular(10)),
                       child: TextField(
                         controller: detailcontroller,
@@ -252,21 +252,21 @@ class _AddFoodState extends State<AddFood> {
                             hintStyle: AppWidget.LightTextFeildStyle()),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     Text(
                       "Category",
                       style: AppWidget.semiBooldTextFeildStyle(),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
-                          color: Color(0xFFececf8),
+                          color: const Color(0xFFececf8),
                           borderRadius: BorderRadius.circular(10)),
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
@@ -279,7 +279,7 @@ class _AddFoodState extends State<AddFood> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30.0,
                     ),
                     GestureDetector(
@@ -287,12 +287,12 @@ class _AddFoodState extends State<AddFood> {
                         uploadItem();
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(10)),
-                        child: Center(
+                        child: const Center(
                             child: Text(
                           "Add Item",
                           style: TextStyle(

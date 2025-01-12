@@ -64,12 +64,12 @@ class _WalletState extends State<Wallet> {
       }
       showDialog(
         context: context,
-        builder: (_) => AlertDialog(
+        builder: (_) => const AlertDialog(
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
-                children: const [
+                children: [
                   Icon(
                     Icons.check_circle,
                     color: Colors.green,
@@ -135,7 +135,7 @@ class _WalletState extends State<Wallet> {
                                 ),
                                 const SizedBox(height: 5.0),
                                 Text(
-                                  "\$" + (wallet ?? '0'),
+                                  "\$${wallet ?? '0'}",
                                   style: AppWidget.boldTextFeildStyle(),
                                 ),
                                 // Ajout de messages de débogage
@@ -208,7 +208,7 @@ class _WalletState extends State<Wallet> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: Text(
-          "\$" + amount,
+          "\$$amount",
           style: AppWidget.semiBooldTextFeildStyle(),
         ),
       ),
@@ -232,7 +232,7 @@ class _WalletState extends State<Wallet> {
                         child: const Icon(Icons.cancel),
                       ),
                       const SizedBox(width: 60.0),
-                      Center(
+                      const Center(
                         child: Text(
                           "Add Money",
                           style: TextStyle(
